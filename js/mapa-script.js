@@ -1,8 +1,8 @@
 var map;
 function initMap() {
     var mapOptions = {
-        center: {lat: -3.716816, lng: -38.519115},
-        zoom: 4,
+        center: {lat: -11.3300417, lng: -41.8788273},
+        zoom: 16,
         styles: [
             {
                 "featureType": "all",
