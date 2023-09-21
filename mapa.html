@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Mapa Eco</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1.0">
-        
-        <link rel="stylesheet" href="/css/map-style.css">
+<head>
+<title>Mapa Eco</title>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0">
+<link rel="stylesheet" href="/css/map-style.css">
 
-    </head>
+</head>
 
-    <body>
-        <!-- <button id="satellite">Mudar para satélite</button>-->
+<body>
+    <div class="search">
+        <input type="text" name="my_location" id="my_location" placeholder="Onde estou..." value="" />
+        <input type="text" name="job_location" id="job_location" placeholder="Escolha o local..." value="" />
+    </div>
+    <div id="map"></div>
+    
+    <script src="/js/mapa-script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6jbXU6rzzlIPpJvtIYA9TUWeSpAnPiOE&libraries=places&callback=initMap" async defer></script>
 
-        <div id="map"></div>
-
-        <script src="/js/mapa-script.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6jbXU6rzzlIPpJvtIYA9TUWeSpAnPiOE&callback=initMap" async defer></script> <!--&language=en&region=US-->
-    </body>
+</body>
 
 </html>
