@@ -413,7 +413,7 @@ function showError(error)
     autocomplete = new google.maps.places.Autocomplete(
         job_location,
         {
-            types:['(cities)'],
+            types:['(cities, street_address)'],
             componentRestrictions:{'country':['BR']},
             fields: ['place_id', 'geometry', 'name']
         });

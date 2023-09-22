@@ -1,13 +1,29 @@
 html, body {
     height: 500px;
     width: 500px;
-    margin: 0;
-    padding: 0;
+    margin: auto;
+    padding: 5px;
 }
 
 .search {
     width: 500px;
     background-color: rgb(31, 155, 97);
+    border-radius: 10px 10px 0px 0px;
+    padding-top: 5px;
+}
+
+.box_confirmation {
+    background-color: #fff;
+    border: 2px solid #145f3c;
+    border-radius: 10px;
+    color: #333;
+    display: inline-block;
+    font: 16px/24px sans-serif;
+    padding: 12px 24px;
+    position: relative;
+    width: 450px;
+    height: 100px;
+    margin-bottom: 5px;
 }
 
 #map { 
@@ -24,7 +40,7 @@ html, body {
     border-radius: 8px;
     font-size: 20px;
     margin-top: 5px;
-    margin-left: 25px;
+    margin-left: 18px;
     margin-bottom: 10px;
     padding-left: 20px;
     
