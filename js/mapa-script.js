@@ -720,9 +720,12 @@ function initMap() {
     const centerControl = new CenterControl(map);
     const meuLocalControl = new MeuLocalControl(map);
     const selecionarLocalControl = new SelecionarLocalControl(map);
+
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControl.controlDiv);
     map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(meuLocalControl.controlDiv);
     map.controls[google.maps.ControlPosition.LEFT_CENTER].push(selecionarLocalControl.controlDiv); 
+
+    directionsRenderer.setMap(map);
 
     map.addListener('click', function(e) {
         var clickPosition = e.latLng;
@@ -730,15 +733,31 @@ function initMap() {
             position: clickPosition,
             map: map,
             title: 'Adicionar descarte',
-            //label: 'F',
             icon: '/img/coringa.png',
             animation: google.maps.Animation.DROP,//BOUNCE
             draggable: false
         });
 
         abrirDetalhes(clickPosition);
+
+        
     });
-}
+
+    directionsService.route({
+        origin: 'Hospital Regional, Irecê - BA',
+        destination: 'Terminal Rodoviário, Irecê - BA',
+        language: 'pt_BR',
+        travelMode: google.maps.TravelMode.TRANSIT
+
+    }).then(response => {
+        console.log({response});
+        directionsRenderer.setDirections(response);
+    }).catch(err => {
+        console.log({err});
+    });
+
+    } 
+
 
 
 
