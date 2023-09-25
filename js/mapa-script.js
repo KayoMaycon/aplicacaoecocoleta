@@ -2,6 +2,7 @@ var map;
 let autocomplete;
 const centerMap = {lat: -11.3034028, lng: -41.8501411};
 var job_location = document.getElementById('job_location');
+showInMyLocation();
 
 class CenterControl {
     constructor(map) {
@@ -409,6 +410,32 @@ function showError(error)
     }
   }
 
+  function showInMyLocation() {
+    getLocation();
+    function getLocation()
+    {
+    if (navigator.geolocation)
+      {
+      navigator.geolocation.getCurrentPosition(showPosition,showError);
+      }
+    else{alert("Geolocalização não é suportada nesse browser.");}
+    }
+   
+  function showPosition(position)
+    {
+    lat=position.coords.latitude;
+    lon=position.coords.longitude;
+    latlon=new google.maps.LatLng(lat, lon)
+    var my_location = document.getElementById('my_location').placeholder=latlon; 
+    
+    }
+   
+}
+
+  function abrirDetalhes(clickPosition) {
+    alert(clickPosition);
+  }
+
   function initAutocomplete() {
     autocomplete = new google.maps.places.Autocomplete(
         job_location,
@@ -421,6 +448,10 @@ function showError(error)
 
 function initMap() {
     initAutocomplete();
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer({
+     //   draggable: true
+    });
     var mapOptions = {
         center: {lat: -11.3300417, lng: -41.8788273},
         zoomControl: false,
@@ -692,6 +723,21 @@ function initMap() {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControl.controlDiv);
     map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(meuLocalControl.controlDiv);
     map.controls[google.maps.ControlPosition.LEFT_CENTER].push(selecionarLocalControl.controlDiv); 
+
+    map.addListener('click', function(e) {
+        var clickPosition = e.latLng;
+        new google.maps.Marker({
+            position: clickPosition,
+            map: map,
+            title: 'Adicionar descarte',
+            //label: 'F',
+            icon: '/img/coringa.png',
+            animation: google.maps.Animation.DROP,//BOUNCE
+            draggable: false
+        });
+
+        abrirDetalhes(clickPosition);
+    });
 }
 
 
