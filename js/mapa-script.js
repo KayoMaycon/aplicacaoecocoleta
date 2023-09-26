@@ -3,6 +3,7 @@ var directionsRenderer;
 var job_location = document.getElementById('job_location');
 let autocomplete;
 const centerMap = {lat: -11.3034028, lng: -41.8501411};
+let userLocation = null;
 
 class CenterControl {
     constructor(map) {
@@ -98,6 +99,8 @@ function showPosition(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
     const latlon = new google.maps.LatLng(lat, lon);
+
+    userLocation = latlon;
 
     // Atualiza o mapa com as coordenadas
     updateMap(latlon);
@@ -418,23 +421,6 @@ function updateMap(latlon) {
         abrirDetalhes(clickPosition);
     });
 }
-
-function showError(error) {
-    switch (error.code) {
-        case error.PERMISSION_DENIED:
-            alert("Usuário rejeitou a solicitação de Geolocalização.");
-            break;
-        case error.POSITION_UNAVAILABLE:
-            alert("Localização indisponível.");
-            break;
-        case error.TIMEOUT:
-            alert("O tempo da requisição expirou.");
-            break;
-        case error.UNKNOWN_ERROR:
-            alert("Algum erro desconhecido aconteceu.");
-            break;
-    }
-}
  
 function showError(error)
   {
@@ -498,6 +484,7 @@ function geocodeLatLng(geocoder, lat, lon) {
   }
 
   function calculateRoute(destinationLocation) {
+    console.log(userLocation);
     const directionsService = new google.maps.DirectionsService();
 
     directionsRenderer = new google.maps.DirectionsRenderer({
@@ -507,7 +494,7 @@ function geocodeLatLng(geocoder, lat, lon) {
     try {
         const request = {
             travelMode: google.maps.TravelMode.DRIVING,
-            origin: centerMap, // Sua localização atual (centerMap)
+            origin: userLocation, // Sua localização atual (centerMap)
             destination: destinationLocation, // Coordenadas do destino selecionado
         };
 
@@ -544,8 +531,8 @@ function initAutocomplete() {
 }
 
 function initMap() {
-    initAutocomplete();
     getLocation();
+    initAutocomplete();
 
     var mapOptions = {
         center: {lat: -11.3300417, lng: -41.8788273},
