@@ -2,7 +2,6 @@ var map;
 var directionsRenderer;
 var job_location = document.getElementById('job_location');
 let autocomplete;
-const centerMap = {lat: -11.3034028, lng: -41.8501411};
 let userLocation = null;
 
 class CenterControl {
@@ -122,7 +121,7 @@ function showPosition(position) {
     const geocoder = new google.maps.Geocoder();
     geocodeLatLng(geocoder, lat, lon);
 
-    // Verifica se a variável place está definida
+    // Verifica se a variável está definida
     if (typeof place !== 'undefined') {
         // Chama a função calculateRoute com as coordenadas
         calculateRoute(latlon, place);
